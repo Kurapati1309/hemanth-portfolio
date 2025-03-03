@@ -1,77 +1,62 @@
 /* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Global Styles */
+/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #fff;
-    padding: 20px;
-    text-align: center;
     margin: 0;
+    padding: 0;
 }
 
-/* Header */
-header {
-    padding: 40px;
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation Bar */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    text-align: center;
+    z-index: 1000;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
-p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+nav ul li {
+    margin: 0 15px;
 }
 
-/* Content Sections */
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Section Containers */
 .container {
     max-width: 900px;
     margin: 50px auto;
     background: rgba(255, 255, 255, 0.15);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-/* Section Headings */
-h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: #ffcc00;
-}
-
-/* Lists */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: rgba(255, 255, 255, 0.2);
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: left;
-}
-
-/* Links */
-a {
-    color: #ffcc00;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-a:hover {
-    color: #ffd633;
-    text-decoration: underline;
 }
 
 /* Footer */
@@ -79,15 +64,4 @@ footer {
     margin-top: 50px;
     font-size: 0.9rem;
     opacity: 0.8;
-}
-
-/* Hover Effects */
-li:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transition: 0.3s;
-}
-
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
 }
