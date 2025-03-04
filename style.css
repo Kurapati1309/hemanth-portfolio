@@ -30,8 +30,8 @@ nav {
 
 nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
 }
@@ -59,11 +59,12 @@ nav ul li a:hover {
   height: 100vh;
   text-align: center;
   background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
-  padding-top: 60px; /* Space for nav */
+  padding-top: 60px; /* Allow space for nav */
 }
 
 .hero-content {
   max-width: 700px;
+  animation: fadeIn 1s ease-out;
 }
 
 .profile-pic {
@@ -74,6 +75,7 @@ nav ul li a:hover {
   margin-bottom: 20px;
 }
 
+/* Headings & Text */
 h1 {
   font-size: 3.5rem;
   margin-bottom: 10px;
@@ -95,30 +97,28 @@ p, li {
   line-height: 1.5;
 }
 
-a {
-  color: #ffcc00;
-  transition: color 0.3s;
-}
-
-a:hover {
-  color: #ffd633;
-}
-
-/* Container for Content Sections */
+/* Container for Sections */
 .container {
   max-width: 900px;
-  margin: 100px auto 50px auto;
+  margin: 100px auto 50px;
   background: rgba(0, 0, 0, 0.6);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: fadeIn 1s ease-out;
 }
 
-/* Articles for Experiences and Projects */
+/* Articles in Experience and Projects */
 article {
   margin-bottom: 30px;
+  transition: transform 0.3s;
 }
 
+article:hover {
+  transform: scale(1.02);
+}
+
+/* Lists inside Articles */
 article ul {
   list-style: disc;
   margin-left: 20px;
@@ -142,7 +142,7 @@ article ul {
   transform: scale(1.05);
 }
 
-/* Form Styles (for contact page) */
+/* Form Styles */
 form {
   margin-top: 20px;
   text-align: left;
@@ -178,11 +178,22 @@ form button:hover {
   transform: scale(1.05);
 }
 
-/* Responsive Adjustments */
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
   h1 { font-size: 2.8rem; }
   h2 { font-size: 2rem; }
   nav ul { flex-direction: column; }
   nav ul li { margin: 10px 0; }
 }
-
