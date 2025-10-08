@@ -3,6 +3,18 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronRight, ExternalLink } from "lucide-react";
 import "./index.css";
 
+// ---------- Base-aware asset helper (works with Vite base) ----------
+const base = import.meta.env.BASE_URL; // e.g. "/hemanth-portfolio/"
+const ASSET = {
+  profile: `${base}images/profile.jpeg`,
+  etl: `${base}images/etl-arch.png`,
+  pricing: `${base}images/pricing.png`,
+  callcenter: `${base}images/callcenter.png`,
+  lakehouse: `${base}images/lakehouse.png`,
+  cv: `${base}Hemanth_DSZ_CV.pdf`,
+};
+// -------------------------------------------------------------------
+
 // Small helpers
 const Section = ({
   id,
@@ -69,7 +81,7 @@ export default function App() {
       title: "Real-Time ETL Platform",
       copy:
         "Streaming ingestion → curated lake → Redshift marts. Orchestrated with Airflow/dbt. Reduced data latency by 30%.",
-      img: "/images/etl-arch.png",
+      img: ASSET.etl,
       link: "#",
       stack: ["Spark", "AWS Glue", "S3", "Redshift", "dbt"],
     },
@@ -77,7 +89,7 @@ export default function App() {
       title: "Predictive Pricing & Demand",
       copy:
         "Forecasts with Prophet/ARIMA and elastic pricing engine. Live KPI boards for business.",
-      img: "/images/pricing.png",
+      img: ASSET.pricing,
       link: "#",
       stack: ["Python", "Prophet", "Databricks", "Tableau"],
     },
@@ -85,7 +97,7 @@ export default function App() {
       title: "AI-Driven Call Center Analytics",
       copy:
         "NLP-validated KPIs (AHT, CSAT, containment) powering exec dashboards and alerts.",
-      img: "/images/callcenter.png",
+      img: ASSET.callcenter,
       link: "#",
       stack: ["Azure", "NLP", "Power BI"],
     },
@@ -93,7 +105,7 @@ export default function App() {
       title: "Lakehouse on Databricks",
       copy:
         "Delta Lake + Unity Catalog patterns for governance, quality, and cost control.",
-      img: "/images/lakehouse.png",
+      img: ASSET.lakehouse,
       link: "#",
       stack: ["Databricks", "Delta Lake", "Unity Catalog"],
     },
@@ -196,7 +208,7 @@ export default function App() {
               </button>
               <a
                 className="inline-flex items-center gap-2 rounded-xl bg-cyan-500/20 px-4 py-2 text-sm font-semibold border border-cyan-400/30 hover:bg-cyan-500/30"
-                href="/Hemanth_DSZ_CV.pdf"
+                href={ASSET.cv}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -213,7 +225,7 @@ export default function App() {
             <div className="relative mx-auto aspect-square max-w-sm">
               <div className="absolute inset-0 animate-pulse rounded-[2rem] bg-gradient-to-tr from-cyan-400/20 to-violet-400/20 blur-2xl" />
               <img
-                src="/images/profile.jpeg"
+                src={ASSET.profile}
                 alt="Hemanth"
                 className="relative rounded-[2rem] border border-white/10 bg-white/5 object-cover shadow-2xl w-full h-full"
               />
