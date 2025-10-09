@@ -3,19 +3,11 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronRight, ExternalLink } from "lucide-react";
 import "./index.css";
 
-// ---------- Base-aware asset helper (works with Vite base) ----------
-const base = import.meta.env.BASE_URL; // e.g. "/hemanth-portfolio/"
-const ASSET = {
-  profile: `${base}images/profile.jpeg`,
-  etl: `${base}images/etl-arch.png`,
-  pricing: `${base}images/pricing.png`,
-  callcenter: `${base}images/callcenter.png`,
-  lakehouse: `${base}images/lakehouse.png`,
-  cv: `${base}Hemanth_DSZ_CV.pdf`,
-};
-// -------------------------------------------------------------------
+// ✅ Build a helper so assets work on localhost AND GitHub Pages
+const BASE = import.meta.env.BASE_URL || "/"; // e.g. "/" locally, "/hemanth-portfolio/" on Pages
+const asset = (p: string) => `${BASE.replace(/\/$/, "")}${p.startsWith("/") ? p : `/${p}`}`;
 
-// Small helpers
+// Section component helper
 const Section = ({
   id,
   title,
@@ -55,7 +47,7 @@ const Section = ({
 );
 
 export default function App() {
-  // Smooth scroll for nav links
+  // Smooth scroll navigation
   const go = (target: string) => {
     const el = document.querySelector(target);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -81,7 +73,7 @@ export default function App() {
       title: "Real-Time ETL Platform",
       copy:
         "Streaming ingestion → curated lake → Redshift marts. Orchestrated with Airflow/dbt. Reduced data latency by 30%.",
-      img: ASSET.etl,
+      img: asset("images/etl-arch.png"),
       link: "#",
       stack: ["Spark", "AWS Glue", "S3", "Redshift", "dbt"],
     },
@@ -89,7 +81,7 @@ export default function App() {
       title: "Predictive Pricing & Demand",
       copy:
         "Forecasts with Prophet/ARIMA and elastic pricing engine. Live KPI boards for business.",
-      img: ASSET.pricing,
+      img: asset("images/pricing.png"),
       link: "#",
       stack: ["Python", "Prophet", "Databricks", "Tableau"],
     },
@@ -97,7 +89,7 @@ export default function App() {
       title: "AI-Driven Call Center Analytics",
       copy:
         "NLP-validated KPIs (AHT, CSAT, containment) powering exec dashboards and alerts.",
-      img: ASSET.callcenter,
+      img: asset("images/callcenter.png"),
       link: "#",
       stack: ["Azure", "NLP", "Power BI"],
     },
@@ -105,7 +97,7 @@ export default function App() {
       title: "Lakehouse on Databricks",
       copy:
         "Delta Lake + Unity Catalog patterns for governance, quality, and cost control.",
-      img: ASSET.lakehouse,
+      img: asset("images/lakehouse.png"),
       link: "#",
       stack: ["Databricks", "Delta Lake", "Unity Catalog"],
     },
@@ -168,12 +160,7 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section
-        id="home"
-        className="relative overflow-hidden"
-        style={{ minHeight: "74vh" }}
-      >
-        {/* animated orbs */}
+      <section id="home" className="relative overflow-hidden" style={{ minHeight: "74vh" }}>
         <div className="pointer-events-none absolute inset-0 opacity-40">
           <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-cyan-500 blur-3xl" />
           <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-violet-500 blur-3xl" />
@@ -208,7 +195,7 @@ export default function App() {
               </button>
               <a
                 className="inline-flex items-center gap-2 rounded-xl bg-cyan-500/20 px-4 py-2 text-sm font-semibold border border-cyan-400/30 hover:bg-cyan-500/30"
-                href={ASSET.cv}
+                href={asset("Hemanth_DSZ_CV.pdf")}     // ✅ uses BASE URL
                 target="_blank"
                 rel="noreferrer"
               >
@@ -225,7 +212,7 @@ export default function App() {
             <div className="relative mx-auto aspect-square max-w-sm">
               <div className="absolute inset-0 animate-pulse rounded-[2rem] bg-gradient-to-tr from-cyan-400/20 to-violet-400/20 blur-2xl" />
               <img
-                src={ASSET.profile}
+                src={asset("images/profile.jpeg")}      // ✅ uses BASE URL
                 alt="Hemanth"
                 className="relative rounded-[2rem] border border-white/10 bg-white/5 object-cover shadow-2xl w-full h-full"
               />
@@ -243,15 +230,21 @@ export default function App() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <h3 className="font-semibold">Platforms</h3>
-            <p className="text-sm text-gray-300 mt-2">Databricks • Spark • Delta Lake • Unity Catalog • Kafka</p>
+            <p className="text-sm text-gray-300 mt-2">
+              Databricks • Spark • Delta Lake • Unity Catalog • Kafka
+            </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <h3 className="font-semibold">Cloud</h3>
-            <p className="text-sm text-gray-300 mt-2">AWS (S3, Glue, Redshift) • Azure • Terraform • dbt</p>
+            <p className="text-sm text-gray-300 mt-2">
+              AWS (S3, Glue, Redshift) • Azure • Terraform • dbt
+            </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <h3 className="font-semibold">Data & BI</h3>
-            <p className="text-sm text-gray-300 mt-2">PostgreSQL • Snowflake • Power BI • Tableau</p>
+            <p className="text-sm text-gray-300 mt-2">
+              PostgreSQL • Snowflake • Power BI • Tableau
+            </p>
           </div>
         </div>
       </Section>
@@ -308,16 +301,53 @@ export default function App() {
         </div>
       </Section>
 
-      {/* CONTACT */}
+      {/* CONTACT (Formspree Integrated) */}
       <Section id="contact" title="Contact">
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col gap-6">
           <div>
             <h3 className="text-xl font-semibold">Let’s build something reliable.</h3>
             <p className="text-sm text-gray-300 mt-1">
               I respond quickly on email and LinkedIn. Based in Houston, open to hybrid/remote.
             </p>
           </div>
-          <div className="flex gap-2">
+
+          {/* Formspree Form */}
+          <form
+            action="https://formspree.io/f/xovknynn" // 👈 your endpoint
+            method="POST"
+            className="flex flex-col gap-3 w-full md:w-1/2"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              className="p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400"
+            />
+            <input
+              type="email"
+              name="_replyto"
+              placeholder="Your Email"
+              required
+              className="p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400"
+            />
+            <textarea
+              name="message"
+              rows={4}
+              placeholder="Your Message"
+              required
+              className="p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400"
+            />
+            <button
+              type="submit"
+              className="rounded-xl bg-cyan-500/30 px-4 py-2 font-semibold border border-cyan-400/30 hover:bg-cyan-500/40 transition"
+            >
+              Send Message
+            </button>
+          </form>
+
+          {/* Quick links */}
+          <div className="flex flex-wrap gap-2">
             <a
               href="mailto:hk485@nau.edu"
               className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-medium border border-white/10 hover:bg-white/20"
